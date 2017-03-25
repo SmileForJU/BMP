@@ -1,0 +1,46 @@
+package EasyAsFAQ;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public enum StanDokumentu  {
+
+	NOWY(        "Nowy"         ,Akcja.zatwierdz, Akcja.usun, Akcja.edytuj, Akcja.podglad),
+	ZATWIERDZONY( "Zatwierdzony",Akcja.archiwizuj, Akcja.usun, Akcja.podglad),
+	USUNIETY(    "Usunięty"     ,Akcja.przywroc, Akcja.wyrzuc),
+	ACHRIWALNY(  "Archiwalny"   ,Akcja.podglad);
+	
+	
+	private final String nazwa;
+	private java.util.List<Akcja> akcje = new ArrayList<Akcja>();
+	
+	private StanDokumentu(String nazwa, Akcja... akcje){
+		this.nazwa = nazwa;
+		
+		this.akcje = new ArrayList<Akcja>();
+		for(Akcja a : akcje){
+			this.akcje.add(a);
+		}
+		
+	}
+	
+	
+	
+	public String getNazwa() {
+		return nazwa;
+	}
+
+
+	public java.util.List<Akcja> getAkcje() {
+		return Collections.unmodifiableList(akcje);
+	}
+
+
+
+	@Override
+	public String toString(){
+		return nazwa;
+		
+		
+	}
+	
+}
