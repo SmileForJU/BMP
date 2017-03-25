@@ -1,0 +1,46 @@
+public class BPM {
+
+	public static void main(String[] args) throws Exception {
+		System.out.println("BPM");
+		System.out.println("/---------------------\\");
+		System.out.println("|         BMP         |");
+		System.out.println("\\---------------------/");
+		
+		// Initializacja bazy danych
+		 DokumentyDAO.getInstance();
+		 
+		Akcja akcja = null;
+		Dokument dokument = null;
+		do{
+			List<Akcja> akcje = new ArrayList<Akcja>();		
+			akcje.add(Akcja.nowy);
+			akcje.add(Akcja.wybierzZListy);
+			if(dokument!=null){
+				akcje.addAll(dokument.getStan().getAkcje()); // dodanie akcji ze stanu dokumentu
+				System.out.println("Otwarty dokument:" +dokument.getNazwa()+","+dokument.getStan());
+			}
+			
+			
+			akcje.add(Akcja.koniec);
+			System.out.println("Wybierz akcje");
+			int i=1; 
+			for(Akcja a : akcje){
+				System.out.println("   "+i+": "+a);
+				i++;
+			}
+			
+			System.out.print("podaj numer akcji> ");
+			String cmd = Utils.readLine();
+			int nrAkcji = Integer.parseInt(cmd);
+			akcja = akcje.get(nrAkcji-1);
+			
+		dokument =	akcja.wykonaj(dokument);
+			
+		}while(akcja!=Akcja.koniec);
+		
+		
+		
+		System.out.println("Koniec");
+	}
+
+}
