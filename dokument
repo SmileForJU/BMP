@@ -1,0 +1,48 @@
+package EasyAsFAQ;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Dokument implements Serializable{
+
+	private static final long serialVersionUID = 8L;
+	
+	private String nazwa;
+	private String tresc;
+	private StanDokumentu stan;
+	private java.util.List<Zdarzenie>  historia = new ArrayList<Zdarzenie>();
+	
+	
+	public String getNazwa() {
+		return nazwa;
+	}
+	public void setNazwa(String nazwa) {
+		this.nazwa = nazwa;
+	}
+	public String getTresc() {
+		return tresc;
+	}
+	public void setTresc(String tresc) {
+		this.tresc = tresc;
+	}
+	public StanDokumentu getStan() {
+		return stan;
+	}
+	public void setStan(StanDokumentu stan) {
+		this.stan = stan;
+		historia.add(new Zdarzenie(stan));
+	}
+	public java.util.List<Zdarzenie> getHistoria() {
+		return historia;
+	}
+	public void setHistoria(java.util.List<Zdarzenie> historia) {
+		this.historia = historia;
+	}
+	
+	
+	@Override
+		public String toString(){
+			return nazwa;
+		}
+	}
+	
+
