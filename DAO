@@ -1,0 +1,55 @@
+package EasyAsFAQ;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DokumentyDAO {
+	
+	public static final File plik = new File("dokumenty.dat");
+	
+	private static DokumentyDAO instance = null;
+	
+	private  List<Dokument> dane;
+	
+	public static DokumentyDAO getInstance(){
+		if(instance==null){
+			instance = new DokumentyDAO();
+		}
+		return instance;
+	}
+	@SuppressWarnings("unchecked")
+	private DokumentyDAO(){
+		if(!plik.exists()){
+			dane = new ArrayList<Dokument>();
+			zapiszDane();
+			try {
+				Utils.zapiszObiektDoPliku(plik, dane);
+			} 
+					catch (IOException e) {		
+				e.printStackTrace();
+			}
+	
+		} else{
+		try {
+			dane =	(List<Dokument>)Utils.czytajObiektZPliku(plik);
+		} catch (Exception e) {
+			e.printStackTrace();
+			}
+		}
+	}
+	public List<Dokument> getDane() {
+		return dane;
+	}
+	
+	public void zapiszDane(){
+		try {
+			Utils.zapiszObiektDoPliku(plik, dane);
+		} 
+				catch (IOException e) {		
+			e.printStackTrace();
+		}
+	}
+	
+}
