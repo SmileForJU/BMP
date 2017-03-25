@@ -1,0 +1,33 @@
+package EasyAsFAQ;
+import java.io.Serializable;
+import java.util.Date;
+
+import KsiazkaTelefoniczna.Utils;
+
+public class Zdarzenie implements Serializable{
+
+	
+	private static final long serialVersionUID = 1L;
+	
+	private final Date data;
+	private final StanDokumentu stan;
+
+	public Zdarzenie(StanDokumentu stan){
+		this.stan = stan;
+		data = new Date();
+	}
+	
+	public Date getData() {
+		return data;
+	}
+
+	public StanDokumentu getStan() {
+		return stan;
+	}
+
+
+	public String toString(){
+		return  Utils.df.format(data)  +": "+stan;
+	}
+	
+}
